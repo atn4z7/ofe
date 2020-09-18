@@ -11,6 +11,7 @@ export type ActionObject = {
 
 export type Routine = {
   trigger: Action;
+  running: Action;
   success: Action;
   error: Action;
 };
@@ -23,11 +24,26 @@ export type User = {
   website: string;
 };
 
+export type Post = {
+  id: number;
+  userId: number;
+  title: string;
+  body: string;
+};
+
 export type UserState = {
   list: User[];
   error?: any;
+  isFetching: boolean;
+};
+
+export type PostState = {
+  list: Post[];
+  error?: any;
+  isFetching: boolean;
 };
 
 export type State = {
   users: UserState;
+  posts: PostState;
 };

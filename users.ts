@@ -1,9 +1,10 @@
-import Actions from './actions';
-import { ActionObject as Action, UserState } from './types';
+import Actions from "./actions";
+import { ActionObject as Action, UserState } from "./types";
 
 const initialState: UserState = {
   list: [],
-  error: null
+  error: null,
+  isFetching: false,
 };
 
 const users = (state: UserState = initialState, action: Action) => {
@@ -12,12 +13,19 @@ const users = (state: UserState = initialState, action: Action) => {
       return {
         ...state,
         list: action.payload,
-        error: null
+        error: null,
+        isFetching: false,
       };
     case Actions.users.fetchUsers.error.toString():
       return {
         ...state,
-        error: action.payload
+        error: action.payload,
+        isFetching: false,
+      };
+    case Actions.users.fetchUsers.running.toString():
+      return {
+        ...state,
+        isFetching: true,
       };
     default:
       return state;
